@@ -40,7 +40,7 @@ export class Ui {
         })
 
         this.tasksContainer.innerHTML = text
-        if(array.length > 0) {
+        if(this.getTasks.getTasks().length > 0) {
             this.tasksContainer.insertAdjacentElement('beforeend', this.div)
             this.renderButtonsFilter()
         }

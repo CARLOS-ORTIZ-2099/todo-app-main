@@ -24,3 +24,9 @@ ui.filtersContainer.addEventListener('click', (e) => {
     }
 })
 
+document.addEventListener('DOMContentLoaded', (e) => {
+    ui.renderTask(ui.getTasks.getTasks())
+})
+
+
+

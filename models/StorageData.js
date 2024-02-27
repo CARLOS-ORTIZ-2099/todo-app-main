@@ -1,9 +1,15 @@
-class StorageData {
+export class StorageData {
     static saveTheme() {
 
     }
 
-    static saveTodos() {
-        
+    static setStorageTodos(data) {
+        localStorage.setItem('task-oop', JSON.stringify(data))
+    }
+
+    static getStorageTodos() {
+        return JSON.parse(localStorage.getItem('task-oop'))
     }
 }
+
+
