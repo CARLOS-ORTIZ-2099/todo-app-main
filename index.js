@@ -22,14 +22,37 @@ ui.filtersContainer.addEventListener('click', (e) => {
 })
 
 
-
-
 ui.button.addEventListener('click', (e) => ui.removeAllTask())
 
-
-document.addEventListener('DOMContentLoaded', (e) => {
+/* document.addEventListener('DOMContentLoaded', (e) => {
     ui.renderTask(ui.getTasks.getTasks())
 })
+ */
 
+const lista  = document.getElementById('tasks-container')
 
+export const listSortable = Sortable.create(lista, {
+    animation:150,
+    chosenClass:"seleccionado",
+    dragClass:"drag",
 
+    onEnd: () => {
+        console.log('se inserto un elemento');
+    },
+    group: "carlos",
+
+    store:{
+        set:(Sortable) => {
+            const orden = Sortable.toArray()
+            console.log(orden);
+            localStorage.setItem(Sortable.options.group.name, orden.join('|'))
+        },
+
+        get: (Sortable) => {
+            const orden = localStorage.getItem(Sortable.options.group.name)
+            ui.renderTask(ui.getTasks.getTasks())
+            return orden ? orden.split('|') : []
+        }
+    }
+
+})

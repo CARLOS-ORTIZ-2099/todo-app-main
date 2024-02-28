@@ -1,3 +1,4 @@
+import { listSortable } from "../index.js";
 import { Todo } from "./Todo.js";
 
 export class Ui {
@@ -44,6 +45,7 @@ export class Ui {
         if(this.getTasks.getTasks().length < 1) {
             this.buttonsContainer.remove()
         }
+        console.log(this.buttonsContainer);
     }
 
     checkCompletedTask(id, completedBolean) {
@@ -66,18 +68,19 @@ export class Ui {
         if(this.getTasks.getTasks().length < 1) {
             this.buttonsContainer.remove()
         }
-        console.log(this);
+        console.log(this.buttonsContainer);
     }
 
     renderButtonsFilter() {
-        this.buttonsContainer.classList.add('buttons-container')
+      
+        if(this.buttonsContainer.children.length < 2) {
+            this.buttonsContainer.classList.add('buttons-container')
 
-        this.button.classList.add('clear-completed')
-        this.button.textContent = 'clear completed'
+            this.button.classList.add('clear-completed')
+            this.button.textContent = 'clear completed'
+    
+            this.filtersContainer.classList.add('filters-container')
 
-        this.filtersContainer.classList.add('filters-container')
-        
-        if(this.filtersContainer.children.length < 3) {
             const allButton = document.createElement('button')
             const activeButton = document.createElement('button')
             const completedButton = document.createElement('button')
@@ -98,16 +101,19 @@ export class Ui {
             case('All'):{
                 console.log(this);
                 this.renderTask(this.getTasks.getTasks())
+                listSortable.option('disabled', false)
                 return
             }
             case('Active'):{
                 const filter =  this.getTasks.getTasks().filter((task) => !task.completed )
                 this.renderTask(filter)
+                listSortable.option('disabled', true)
                 return
             }
             case('Completed'):{
                 const filter =  this.getTasks.getTasks().filter((task) => task.completed )
                 this.renderTask(filter)
+                listSortable.option('disabled', true)
                 return
             }
         }      
