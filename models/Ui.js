@@ -5,7 +5,7 @@ export class Ui {
          this.inputTask = document.querySelector('.input-task')
          this.getTasks = new Todo()
          this.tasksContainer = document.querySelector('.tasks-container')
-         this.div = document.createElement('div')
+         this.buttonsContainer = document.createElement('div')
          this.button = document.createElement('button')
          this.filtersContainer = document.createElement('div')
     }
@@ -14,7 +14,6 @@ export class Ui {
         this.inputTask.addEventListener('keyup', (e) => {
             if(e.code === 'Enter'){
                 this.getTasks.addTask({...this.buildTask(e.target.value)})
-                console.log(this.getTasks);
                 this.renderTask(this.getTasks.getTasks())
                 e.target.value = ''
             }         
@@ -22,11 +21,6 @@ export class Ui {
     }
 
     renderTask(array) {
-       console.log(this);
-        this.button.classList.add('clear-completed')
-        this.button.textContent = 'clear completed'
-        this.div.appendChild(this.button)
-        console.log(array);
         let text = ''
         array.forEach((task) => {
             text+=`
@@ -37,10 +31,8 @@ export class Ui {
                 </div>
             `
         })
-
         this.tasksContainer.innerHTML = text
         if(this.getTasks.getTasks().length > 0) {
-            this.tasksContainer.insertAdjacentElement('afterend', this.div)
             this.renderButtonsFilter()
         }
         
@@ -49,10 +41,8 @@ export class Ui {
     removeTask(e,id) {
         e.target.closest('.task-item').remove()
         this.getTasks.deleteTask(id)
-        console.log(this.getTasks);
         if(this.getTasks.getTasks().length < 1) {
-            this.div.remove()
-            this.filtersContainer.remove()
+            this.buttonsContainer.remove()
         }
     }
 
@@ -73,23 +63,33 @@ export class Ui {
     removeAllTask() {
         this.getTasks.deleteAllTaskCompleted()
         this.renderTask(this.getTasks.getTasks())
-        console.log(this.getTasks);
+        if(this.getTasks.getTasks().length < 1) {
+            this.buttonsContainer.remove()
+        }
+        console.log(this);
     }
 
     renderButtonsFilter() {
+        this.buttonsContainer.classList.add('buttons-container')
+
+        this.button.classList.add('clear-completed')
+        this.button.textContent = 'clear completed'
+
         this.filtersContainer.classList.add('filters-container')
-        const allButton = document.createElement('button')
-        const activeButton = document.createElement('button')
-        const completedButton = document.createElement('button')
-
-        allButton.textContent = 'All'
-        activeButton.textContent = 'Active'
-        completedButton.textContent = 'Completed'
-
-        this.filtersContainer.children.length < 3 ?   this.filtersContainer.append(allButton, activeButton, completedButton):''
-      
-        this.div.insertAdjacentElement('afterend', this.filtersContainer)
         
+        if(this.filtersContainer.children.length < 3) {
+            const allButton = document.createElement('button')
+            const activeButton = document.createElement('button')
+            const completedButton = document.createElement('button')
+
+            allButton.textContent = 'All'
+            activeButton.textContent = 'Active'
+            completedButton.textContent = 'Completed'
+            this.filtersContainer.append(allButton, activeButton, completedButton)
+            this.buttonsContainer.append( this.button, this.filtersContainer)
+        }  
+        
+        this.tasksContainer.insertAdjacentElement('afterend',this.buttonsContainer)
     }
 
     filtersCategory(category) {
@@ -110,10 +110,7 @@ export class Ui {
                 this.renderTask(filter)
                 return
             }
-        }
-        
-    
-        
+        }      
        
     }
 

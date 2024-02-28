@@ -15,13 +15,17 @@ ui.tasksContainer.addEventListener('click', (e) => {
     }
 })
 
-ui.button.addEventListener('click', (e) => ui.removeAllTask())
-
 ui.filtersContainer.addEventListener('click', (e) => {
     if(e.target.matches('button')){
         ui.filtersCategory(e.target.textContent)
     }
 })
+
+
+
+
+ui.button.addEventListener('click', (e) => ui.removeAllTask())
+
 
 document.addEventListener('DOMContentLoaded', (e) => {
     ui.renderTask(ui.getTasks.getTasks())
