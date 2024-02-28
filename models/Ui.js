@@ -96,21 +96,23 @@ export class Ui {
     }
 
     filtersCategory(category) {
-        console.log(this.getTasks);
+       // console.log(this.getTasks);
         switch(category){
             case('All'):{
-                console.log(this);
+               // console.log(this);
                 this.renderTask(this.getTasks.getTasks())
                 listSortable.option('disabled', false)
                 return
             }
             case('Active'):{
+                console.log(this.getTasks.getTasks());
                 const filter =  this.getTasks.getTasks().filter((task) => !task.completed )
                 this.renderTask(filter)
                 listSortable.option('disabled', true)
                 return
             }
             case('Completed'):{
+                console.log(this.getTasks.getTasks());
                 const filter =  this.getTasks.getTasks().filter((task) => task.completed )
                 this.renderTask(filter)
                 listSortable.option('disabled', true)

@@ -1,3 +1,5 @@
+
+import { StorageData } from "./models/StorageData.js";
 import { Ui } from "./models/Ui.js";
 
 const ui = new Ui()
@@ -44,8 +46,25 @@ export const listSortable = Sortable.create(lista, {
     store:{
         set:(Sortable) => {
             const orden = Sortable.toArray()
+            const array = ui.getTasks.getTasks()
             console.log(orden);
+            console.log(array);
+            let ordenado = []
+            // no es la mejor solucion pero si la mas rapida
+            for(let i = 0; i < orden.length; i++){
+
+                for(let j = 0; j < array.length; j++){
+                    if(orden[i] == array[j].id){
+                        ordenado.push(array[j])
+                        break
+                    }
+                }
+            }
+            console.log(ordenado);
+            StorageData.setStorageTodos(ordenado)
+            ui.getTasks.change(ordenado)
             localStorage.setItem(Sortable.options.group.name, orden.join('|'))
+            console.log(ui.getTasks.getTasks());
         },
 
         get: (Sortable) => {

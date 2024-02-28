@@ -28,5 +28,8 @@ export class Todo {
         this.#todos=  this.#todos.filter((task) => !task.completed)
         StorageData.setStorageTodos(this.#todos)
     }
+    change(data) {
+        this.#todos = data 
+    }
 
 }
