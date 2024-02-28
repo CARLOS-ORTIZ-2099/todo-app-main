@@ -13,10 +13,9 @@ ui.tasksContainer.addEventListener('click', (e) => {
         ui.checkCompletedTask(target.dataset.idtask, checkBox.checked)
 
     }
-    else if(e.target.matches('.clear-completed')){
-        ui.removeAllTask()
-    }
 })
+
+ui.button.addEventListener('click', (e) => ui.removeAllTask())
 
 ui.filtersContainer.addEventListener('click', (e) => {
     if(e.target.matches('button')){

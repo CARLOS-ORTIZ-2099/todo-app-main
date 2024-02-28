@@ -13,7 +13,6 @@ export class Ui {
     eventAddTask() {
         this.inputTask.addEventListener('keyup', (e) => {
             if(e.code === 'Enter'){
-                //console.log(e.target.value);
                 this.getTasks.addTask({...this.buildTask(e.target.value)})
                 console.log(this.getTasks);
                 this.renderTask(this.getTasks.getTasks())
@@ -31,9 +30,9 @@ export class Ui {
         let text = ''
         array.forEach((task) => {
             text+=`
-                <div class='task-item'>
+                <div class='task-item' data-id =${task.id}>
                     <h1>${task.titleTask}</h1>
-                    <input class='is-completed' data-idTask =${task.id} type="checkbox">
+                    <input class='is-completed' data-idTask =${task.id} type="checkbox" ${task.completed && 'checked'}>
                     <button class='btn-delete' data-idTask =${task.id}>delete task</button>
                 </div>
             `
@@ -41,7 +40,7 @@ export class Ui {
 
         this.tasksContainer.innerHTML = text
         if(this.getTasks.getTasks().length > 0) {
-            this.tasksContainer.insertAdjacentElement('beforeend', this.div)
+            this.tasksContainer.insertAdjacentElement('afterend', this.div)
             this.renderButtonsFilter()
         }
         
