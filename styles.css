@@ -1,3 +1,19 @@
+
+:root {
+    /* color para cuando se haga hover */
+    --color-primary : hsl(220, 98%, 61%);
+    /* color para el checkbox */
+    --background-primary:linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+    /* colores modo dark */
+    --Very-Light-Gray: hsl(0, 0%, 98%);
+    --Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
+    --Light-Grayish-Blue: hsl(233, 11%, 84%);
+    /* colores modo light */
+    --Dark-Grayish-Blue: hsl(236, 9%, 61%);
+    --Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
+
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -7,6 +23,7 @@
 body{
    min-height: 100vh;
    position: relative;
+   font-family: "Josefin Sans", sans-serif;;
 }
 
 .hidden{
@@ -24,11 +41,11 @@ body{
     justify-content: center;
     align-items: center;
  /*    position: relative; */
-    border: solid red 3px;
+   /*  border: solid red 3px; */
 }
 
 .todo-app-container {
-    border: solid blue 3px;
+ /*    border: solid blue 3px; */
     position: absolute;
     top: 15%;
     display: flex;
@@ -40,7 +57,7 @@ body{
 /* primer hijo */
 
 .head-todo-app {
-    border: dashed green 4px;
+  /*   border: dashed green 4px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -53,7 +70,7 @@ body{
 
 /* segundo hijo */
 .input-todo-app{
-    border: dashed purple 4px;
+  /*   border: dashed purple 4px; */
   /*   padding: .5rem; */
     height: 50px;
     border-radius: 7px;
@@ -70,19 +87,20 @@ body{
 /* tercer hijo */
 
 .tasks-container {
-    border: dashed goldenrod 3px;
+   /*  border: dashed goldenrod 3px; */
     display: flex;
     flex-direction: column;
     /* gap: 5px; */
 }
 
 .task-item {
-    border: solid red 2px;
+    border: solid var(--Light-Grayish-Blue) 1px;
     display: flex;
     justify-content: space-between;  /* Utilizamos space-between para que los dos primeros elementos estén en los extremos */
     align-items: center;  /* Alineamos los elementos verticalmente */
     height: 50px;
     border-radius: 5px;
+    background-color: white;
 }
 
 /* modificando los hijos del tercer elemento */
@@ -99,6 +117,10 @@ body{
     opacity: 0;
     transition: all .5s ease-in-out;
     margin-right: 10px;
+}
+
+.task-item p{
+    color: var(--Very-Dark-Grayish-Blue);
 }
 
 
@@ -131,17 +153,20 @@ body{
 
 .task-item input[type="checkbox"]:checked + p {
     text-decoration: line-through;
+    /* cambiar el color del parrafo */
+    color: var(--Dark-Grayish-Blue);
 }
 
 /* cuarto hijo */
 
 .buttons-container button {
+    cursor: pointer;
     background-color: transparent;
     border: none;
 }
 
 .buttons-container {
-    border: dashed green 3px;
+    border: solid var(--Light-Grayish-Blue) 3px;
     display: flex;
     justify-content: space-between;
     height: 40px;
@@ -152,11 +177,12 @@ body{
 }
 
 .buttons-container span {
-    border: solid red 2px;
+    /* border: solid red 2px; */
+    color: var(--Light-Grayish-Blue);
 }
 
 .buttons-container .filters-container {
-    border: solid blue 2px;
+  /*   border: solid blue 2px; */
     display: flex;
     justify-content: space-around;
     width: 50%;
@@ -164,12 +190,24 @@ body{
 }
 
 .buttons-container .filters-container button{
+
     height: 60%;
+    color: var(--Light-Grayish-Blue);
 }
 
+.buttons-container .filters-container button:first-child{
+    color: var(--color-primary)
+}
+
+.buttons-container button:hover {
+    color: var(--Very-Dark-Grayish-Blue);
+}
+
+
 .buttons-container .clear-completed {
-    border: solid green 2px;
+   /*  border: solid green 2px; */
     height: 60%;
+    color: var(--Light-Grayish-Blue);
 }
 
 @media screen and (max-width:850px) {
@@ -184,7 +222,7 @@ body{
 
 
     .todo-app-container {
-        border: solid red 5px;
+        /* border: solid red 5px; */
         position: absolute;
         top: 8%;
         display: flex;
@@ -194,7 +232,7 @@ body{
     }
 
     .buttons-container .filters-container {
-        border: solid blue 2px;
+        border: solid var(--Light-Grayish-Blue) 2px;
         display: flex;
         justify-content: space-around;
         width: 100%;
