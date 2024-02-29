@@ -10,7 +10,8 @@
     --Light-Grayish-Blue: hsl(233, 11%, 84%);
     /* colores modo light */
     --Dark-Grayish-Blue: hsl(236, 9%, 61%);
-    --Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
+    --Very-Dark-Grayish-Blue: hsl(234, 14%, 30%);
+    --dark: hsl(236, 33%, 26%);
 
 }
 
@@ -173,6 +174,7 @@ body{
     border-radius: 5px;
     align-items: start;
     position: relative;
+    background-color: white;
 
 }
 
@@ -210,6 +212,39 @@ body{
     color: var(--Light-Grayish-Blue);
 }
 
+
+
+/* modo dark */
+
+
+.dark-mode {
+    background-color: var(--dark);
+}
+
+.dark-mode .input-todo-app input,  .dark-mode .tasks-container .task-item, .dark-mode .tasks-container .task-item p
+{
+    background-color: var(--Very-Dark-Grayish-Blue);
+    border: 1px solid #575656;
+    color: var(--Very-Light-Gray);
+}
+ 
+.dark-mode .buttons-container,  .dark-mode .buttons-container span, .dark-mode .buttons-container .filters-container button:last-child, .dark-mode .filters-container button:nth-last-child(2), .dark-mode .buttons-container .clear-completed  {
+    background-color: var(--Very-Dark-Grayish-Blue);
+    border: 1px solid #575656;
+    color: var(--Dark-Grayish-Blue);
+    
+}
+
+
+.dark-mode .buttons-container button:hover {
+    color: var(--Very-Light-Gray)
+}
+
+.dark-mode .main {
+    background-image: url('./images/bg-desktop-dark.jpg');
+}
+
+
 @media screen and (max-width:850px) {
     .main {
         background-image: url('./images/bg-mobile-light.jpg');
@@ -240,6 +275,10 @@ body{
         bottom: -70px;
         padding: .7rem;
         
+    }
+    .dark-mode .filters-container {
+        border: 1px solid #575656;
+        background-color: var(--Very-Dark-Grayish-Blue);
     }
 }
 

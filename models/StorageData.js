@@ -1,6 +1,10 @@
 export class StorageData {
-    static saveTheme() {
+    static saveThemeColor(theme) {
+        localStorage.setItem('theme', theme)
+    }
 
+    static getThemeColor() {
+        return localStorage.getItem('theme') || 'light'
     }
 
     static setStorageTodos(data) {

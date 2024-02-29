@@ -1,4 +1,5 @@
 import { listSortable } from "../index.js";
+import { StorageData } from "./StorageData.js";
 import { Todo } from "./Todo.js";
 
 export class Ui {
@@ -10,6 +11,8 @@ export class Ui {
          this.button = document.createElement('button')
          this.filtersContainer = document.createElement('div')
          this.spanPendingTasks = document.createElement('span')
+         this.imgThemeContainer = document.querySelector('.img-theme-container img')
+         this.selectors = document.querySelectorAll('[data-dark]')
     }
 
     eventAddTask() {
@@ -125,6 +128,29 @@ export class Ui {
             }
         }      
        
+    }
+
+    changeTheme() { 
+        if(this.imgThemeContainer.classList.contains('moon')){
+            this.dark()
+        }
+        else{
+            this.light()
+        }
+    }
+
+    dark() {
+        this.selectors.forEach(el => el.classList.add('dark-mode'))
+        this.imgThemeContainer.classList.remove('moon')
+        this.imgThemeContainer.src ='./images/icon-sun.svg'
+        StorageData.saveThemeColor('dark')
+    }
+
+    light() {
+        this.selectors.forEach(el => el.classList.remove('dark-mode'))
+        this.imgThemeContainer.classList.add('moon')
+        this.imgThemeContainer.src = './images/icon-moon.svg'
+        StorageData.saveThemeColor('light')
     }
 
 }

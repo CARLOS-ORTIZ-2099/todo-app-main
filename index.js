@@ -1,9 +1,10 @@
-
 import { StorageData } from "./models/StorageData.js";
 import { Ui } from "./models/Ui.js";
 
 const ui = new Ui()
 ui.eventAddTask()
+
+ui.imgThemeContainer.addEventListener('click', () => ui.changeTheme())
 
 ui.tasksContainer.addEventListener('click', (e) => {
     let target =  e.target
@@ -23,7 +24,6 @@ ui.filtersContainer.addEventListener('click', (e) => {
     }
 })
 
-
 ui.button.addEventListener('click', (e) => ui.removeAllTask())
 
 /* document.addEventListener('DOMContentLoaded', (e) => {
@@ -39,7 +39,7 @@ export const listSortable = Sortable.create(lista, {
     dragClass:"drag",
 
     onEnd: () => {
-        console.log('se inserto un elemento');
+        //console.log('se inserto un elemento');
     },
     group: "carlos",
 
@@ -47,8 +47,8 @@ export const listSortable = Sortable.create(lista, {
         set:(Sortable) => {
             const orden = Sortable.toArray()
             const array = ui.getTasks.getTasks()
-            console.log(orden);
-            console.log(array);
+           // console.log(orden);
+           // console.log(array);
             let ordenado = []
             // no es la mejor solucion pero si la mas rapida
             for(let i = 0; i < orden.length; i++){
@@ -60,14 +60,16 @@ export const listSortable = Sortable.create(lista, {
                     }
                 }
             }
-            console.log(ordenado);
+          //  console.log(ordenado);
             StorageData.setStorageTodos(ordenado)
             ui.getTasks.change(ordenado)
             localStorage.setItem(Sortable.options.group.name, orden.join('|'))
-            console.log(ui.getTasks.getTasks());
+          //  console.log(ui.getTasks.getTasks());
         },
 
         get: (Sortable) => {
+            const theme = StorageData.getThemeColor()
+            theme === 'light' ? ui.light() : ui.dark()
             const orden = localStorage.getItem(Sortable.options.group.name)
             ui.renderTask(ui.getTasks.getTasks())
             return orden ? orden.split('|') : []
