@@ -9,6 +9,7 @@ export class Ui {
          this.buttonsContainer = document.createElement('div')
          this.button = document.createElement('button')
          this.filtersContainer = document.createElement('div')
+         this.spanPendingTasks = document.createElement('span')
     }
 
     eventAddTask() {
@@ -17,6 +18,7 @@ export class Ui {
                 this.getTasks.addTask({...this.buildTask(e.target.value)})
                 this.renderTask(this.getTasks.getTasks())
                 e.target.value = ''
+                this.spanPendingTasks.innerHTML = `${ this.getTasks.pendingTasks()} items left`
             }         
         })
     }
@@ -26,9 +28,9 @@ export class Ui {
         array.forEach((task) => {
             text+=`
                 <div class='task-item' data-id =${task.id}>
-                    <h1>${task.titleTask}</h1>
                     <input class='is-completed' data-idTask =${task.id} type="checkbox" ${task.completed && 'checked'}>
-                    <button class='btn-delete' data-idTask =${task.id}>delete task</button>
+                    <p>${task.titleTask}</p>
+                    <img class='btn-delete' data-idTask =${task.id} src="./images/icon-cross.svg" alt="">
                 </div>
             `
         })
@@ -42,6 +44,7 @@ export class Ui {
     removeTask(e,id) {
         e.target.closest('.task-item').remove()
         this.getTasks.deleteTask(id)
+        this.spanPendingTasks.innerHTML = `${this.getTasks.pendingTasks()} items left`
         if(this.getTasks.getTasks().length < 1) {
             this.buttonsContainer.remove()
         }
@@ -51,6 +54,7 @@ export class Ui {
     checkCompletedTask(id, completedBolean) {
         this.getTasks.completedTask(id, completedBolean)
         console.log(this.getTasks);
+        this.spanPendingTasks.innerHTML = `${this.getTasks.pendingTasks()} items left`
     }
 
     buildTask(titleTask) {
@@ -74,6 +78,7 @@ export class Ui {
     renderButtonsFilter() {
       
         if(this.buttonsContainer.children.length < 2) {
+            this.spanPendingTasks.innerHTML = `${ this.getTasks.pendingTasks()} items left`
             this.buttonsContainer.classList.add('buttons-container')
 
             this.button.classList.add('clear-completed')
@@ -89,7 +94,7 @@ export class Ui {
             activeButton.textContent = 'Active'
             completedButton.textContent = 'Completed'
             this.filtersContainer.append(allButton, activeButton, completedButton)
-            this.buttonsContainer.append( this.button, this.filtersContainer)
+            this.buttonsContainer.append( this.spanPendingTasks ,this.filtersContainer, this.button)
         }  
         
         this.tasksContainer.insertAdjacentElement('afterend',this.buttonsContainer)

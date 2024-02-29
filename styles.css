@@ -1,3 +1,208 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+   min-height: 100vh;
+   position: relative;
+}
+
 .hidden{
     display: none;
 }
+
+.main {
+    background-image: url('./images/bg-desktop-light.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ /*    position: relative; */
+    border: solid red 3px;
+}
+
+.todo-app-container {
+    border: solid blue 3px;
+    position: absolute;
+    top: 15%;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    gap: 2rem;
+}
+
+/* primer hijo */
+
+.head-todo-app {
+    border: dashed green 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.head-todo-app h1{
+    font-size: 2.7rem;
+    color: aliceblue;
+}
+
+/* segundo hijo */
+.input-todo-app{
+    border: dashed purple 4px;
+  /*   padding: .5rem; */
+    height: 50px;
+    border-radius: 7px;
+    
+}
+
+.input-todo-app input {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+
+/* tercer hijo */
+
+.tasks-container {
+    border: dashed goldenrod 3px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 5px; */
+}
+
+.task-item {
+    border: solid red 2px;
+    display: flex;
+    justify-content: space-between;  /* Utilizamos space-between para que los dos primeros elementos estén en los extremos */
+    align-items: center;  /* Alineamos los elementos verticalmente */
+    height: 50px;
+    border-radius: 5px;
+}
+
+/* modificando los hijos del tercer elemento */
+
+.task-item input,
+.task-item p {
+    margin-right: 10px;  /* Ajustamos el margen derecho entre los dos primeros elementos */
+    cursor: pointer;
+}
+
+.task-item img {
+    margin-left: auto;  /* Hacemos que el botón esté más pegado a la derecha usando auto para ocupar el espacio restante */
+    cursor: pointer;
+    opacity: 0;
+    transition: all .5s ease-in-out;
+    margin-right: 10px;
+}
+
+
+
+.task-item:hover img{
+    opacity: 1;
+    transition: all .5s ease-in-out ;
+    
+}
+
+.task-item input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    outline: none;
+    
+
+    /* Establecer la imagen SVG como fondo cuando está marcado */
+    &:checked {
+        background-color: #7F9EF7; /* Cambiar el color de fondo cuando está marcado */
+        border-color: #4CAF50;
+        background-image: url('./images/icon-check.svg');
+        background-size: 100% 100%;
+    }
+}
+
+.task-item input[type="checkbox"]:checked + p {
+    text-decoration: line-through;
+}
+
+/* cuarto hijo */
+
+.buttons-container button {
+    background-color: transparent;
+    border: none;
+}
+
+.buttons-container {
+    border: dashed green 3px;
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    border-radius: 5px;
+    align-items: start;
+    position: relative;
+
+}
+
+.buttons-container span {
+    border: solid red 2px;
+}
+
+.buttons-container .filters-container {
+    border: solid blue 2px;
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    
+}
+
+.buttons-container .filters-container button{
+    height: 60%;
+}
+
+.buttons-container .clear-completed {
+    border: solid green 2px;
+    height: 60%;
+}
+
+@media screen and (max-width:850px) {
+    .main {
+        background-image: url('./images/bg-mobile-light.jpg');
+        min-height: 30vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .todo-app-container {
+        border: solid red 5px;
+        position: absolute;
+        top: 8%;
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        gap: 1rem;
+    }
+
+    .buttons-container .filters-container {
+        border: solid blue 2px;
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        position: absolute;
+        bottom: -70px;
+        padding: .7rem;
+        
+    }
+}
+
+

@@ -6,6 +6,7 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   
+  <link rel="stylesheet" href="styles.css">
   <title>Frontend Mentor | Todo app</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
@@ -13,15 +14,9 @@
 </head>
 <body>
 
-  <style>
 
-    body{
-      background-color: gray;
-    }
 
-  </style>
-
-<!--   Todo
+<!--   
 
   (Add dynamic number ) items left
 
@@ -32,13 +27,27 @@
   Clear Completed
 
   Drag and drop to reorder list -->
+  <section class="main">
 
-  <input class="input-task" type="text" placeholder="add task">
+      <div class="todo-app-container">      
+          <div class="head-todo-app">
+            <h1>Todo</h1> 
+            <span><img src="./images/icon-moon.svg" alt=""></span>
+          </div>
 
-  <div class="tasks-container" id="tasks-container">
+          <div class="input-todo-app">
+            <input class="input-task" type="text" placeholder="add task">
+          </div>
 
-    
-  </div>
+          <div class="tasks-container" id="tasks-container">
+        
+            
+          </div>
+      </div>
+
+  </section>
+
+ 
 
   
 

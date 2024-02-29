@@ -75,3 +75,8 @@ export const listSortable = Sortable.create(lista, {
     }
 
 })
+
+
+
+
+

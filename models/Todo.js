@@ -32,4 +32,15 @@ export class Todo {
         this.#todos = data 
     }
 
+    pendingTasks() {
+       const number = this.#todos.reduce((acc, current) => {
+            if(!current.completed){
+                return acc + 1
+            }else{
+                return acc
+            }
+       }, 0)
+       return number
+    }
+
 }
