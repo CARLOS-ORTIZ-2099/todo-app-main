@@ -17,10 +17,11 @@ export class Ui {
 
     eventAddTask() {
         this.inputTask.addEventListener('keyup', (e) => {
-            if(e.code === 'Enter'){
-                this.getTasks.addTask({...this.buildTask(e.target.value)})
+            console.log(e.key);
+            if( (e.key === 'Enter' || e.code === 'Enter') && this.inputTask.value.trim() !== ''){
+                this.getTasks.addTask({...this.buildTask(this.inputTask.value)})
                 this.renderTask(this.getTasks.getTasks())
-                e.target.value = ''
+                this.inputTask.value = ''
                 this.spanPendingTasks.innerHTML = `${ this.getTasks.pendingTasks()} items left`
             }         
         })
