@@ -17,7 +17,7 @@ export class Ui {
 
     eventAddTask() {
         this.inputTask.addEventListener('keyup', (e) => {
-            console.log(e.key);
+           // console.log(e.key);
             if( (e.key === 'Enter' || e.code === 'Enter') && this.inputTask.value.trim() !== ''){
                 this.getTasks.addTask({...this.buildTask(this.inputTask.value)})
                 this.renderTask(this.getTasks.getTasks())

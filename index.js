@@ -26,31 +26,28 @@ ui.filtersContainer.addEventListener('click', (e) => {
 
 ui.button.addEventListener('click', (e) => ui.removeAllTask())
 
-/* document.addEventListener('DOMContentLoaded', (e) => {
-    ui.renderTask(ui.getTasks.getTasks())
-})
- */
-
 const lista  = document.getElementById('tasks-container')
 
 export const listSortable = Sortable.create(lista, {
     animation:150,
     chosenClass:"seleccionado",
     dragClass:"drag",
-
-    onEnd: () => {
-        //console.log('se inserto un elemento');
-    },
     group: "carlos",
 
     store:{
-        set:(Sortable) => {
+        set:(Sortable, id) => {
+            console.log(id);
             const orden = Sortable.toArray()
+            console.log(orden);
+            if(id && !orden.includes(id)){
+                console.log('entro');
+                orden.push(id)
+            }
             const array = ui.getTasks.getTasks()
-           // console.log(orden);
+            console.log(orden);
            // console.log(array);
             let ordenado = []
-            // no es la mejor solucion pero si la mas rapida
+            // no es la mejor solucion pero si la mas facil de inplementar
             for(let i = 0; i < orden.length; i++){
 
                 for(let j = 0; j < array.length; j++){
@@ -68,6 +65,9 @@ export const listSortable = Sortable.create(lista, {
         },
 
         get: (Sortable) => {
+            console.log('get');
+            // el metodo toArray devuelve un arreglo que contendra los ids de los elementos hijos de un contenedor especifico
+            console.log(Sortable.toArray());
             const theme = StorageData.getThemeColor()
             theme === 'light' ? ui.light() : ui.dark()
             const orden = localStorage.getItem(Sortable.options.group.name)
@@ -77,7 +77,6 @@ export const listSortable = Sortable.create(lista, {
     }
 
 })
-
 
 
 

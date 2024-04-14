@@ -1,5 +1,5 @@
 import { StorageData } from "./StorageData.js"
-
+import { listSortable } from "../index.js";
 
 export class Todo {
     #todos = StorageData.getStorageTodos() ||  []
@@ -12,6 +12,8 @@ export class Todo {
     addTask(task){
         this.#todos.push(task)
         StorageData.setStorageTodos(this.#todos)
+        console.log(listSortable.options.store);
+        localStorage.getItem('carlos') ? listSortable.options.store.set(listSortable, task.id) : ''
     }
 
     completedTask(id, boolean){
