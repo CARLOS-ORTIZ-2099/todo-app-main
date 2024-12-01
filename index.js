@@ -35,31 +35,44 @@ export const listSortable = Sortable.create(lista, {
     group: "carlos",
 
     store:{
-        set:(Sortable, id) => {
+        set:(Sortable, id, category = 'All') => {
+            console.log(category);
             console.log(id);
-            const orden = Sortable.toArray()
+            // sortable me devolvera un arreglo con los ids de los items ordenados que esten presentes en la pantalla
+            let orden =  Sortable.toArray()
             console.log(orden);
+            // sel el id es thurty quiere decir que se esta pasando una tarea nueva y que ya hay un orden establecido en LS y ese es el que debemos seguir
+            if(id && !orden.includes(id)){
+                orden = localStorage.getItem('carlos').split('|') 
+                console.log('entro');
+                orden.push(id)
+                console.log(orden);
+            }
+            
+           /*  console.log(orden);
             if(id && !orden.includes(id)){
                 console.log('entro');
                 orden.push(id)
-            }
-            const array = ui.getTasks.getTasks()
-            console.log(orden);
-           // console.log(array);
-            let ordenado = []
-            // no es la mejor solucion pero si la mas facil de inplementar
-            for(let i = 0; i < orden.length; i++){
-
-                for(let j = 0; j < array.length; j++){
-                    if(orden[i] == array[j].id){
-                        ordenado.push(array[j])
-                        break
+            } */
+            if(category == 'All'){
+                const array = ui.getTasks.getTasks()
+                console.log(orden);
+                console.log(array);
+                let ordenado = []
+                // no es la mejor solucion pero si la mas facil de inplementar
+                for(let i = 0; i < orden.length; i++){
+    
+                    for(let j = 0; j < array.length; j++){
+                        if(orden[i] == array[j].id){
+                            ordenado.push(array[j])
+                            break
+                        }
                     }
                 }
+              //  console.log(ordenado);
+                StorageData.setStorageTodos(ordenado)
+                ui.getTasks.change(ordenado)
             }
-          //  console.log(ordenado);
-            StorageData.setStorageTodos(ordenado)
-            ui.getTasks.change(ordenado)
             localStorage.setItem(Sortable.options.group.name, orden.join('|'))
           //  console.log(ui.getTasks.getTasks());
         },

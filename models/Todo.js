@@ -9,11 +9,12 @@ export class Todo {
         return this.#todos
     }
 
-    addTask(task){
+    addTask(task, category){
         this.#todos.push(task)
+        //console.log(this.#todos);
         StorageData.setStorageTodos(this.#todos)
-        console.log(listSortable.options.store);
-        localStorage.getItem('carlos') ? listSortable.options.store.set(listSortable, task.id) : ''
+        //console.log(listSortable.options.store);
+        localStorage.getItem('carlos') ? listSortable.options.store.set(listSortable, task.id, category) : ''
     }
 
     completedTask(id, boolean){

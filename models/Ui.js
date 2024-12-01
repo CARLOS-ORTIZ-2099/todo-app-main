@@ -1,6 +1,7 @@
 import { listSortable } from "../index.js";
 import { StorageData } from "./StorageData.js";
 import { Todo } from "./Todo.js";
+import {addTask, deleteTask} from '../helpers/alerts.js'
 
 export class Ui {
     constructor() {
@@ -13,14 +14,24 @@ export class Ui {
          this.spanPendingTasks = document.createElement('span')
          this.imgThemeContainer = document.querySelector('.img-theme-container img')
          this.selectors = document.querySelectorAll('[data-dark]')
+         this.categoryFilter = {category : 'All'}
     }
 
     eventAddTask() {
         this.inputTask.addEventListener('keyup', (e) => {
            // console.log(e.key);
             if( (e.key === 'Enter' || e.code === 'Enter') && this.inputTask.value.trim() !== ''){
-                this.getTasks.addTask({...this.buildTask(this.inputTask.value)})
-                this.renderTask(this.getTasks.getTasks())
+                this.getTasks.addTask({...this.buildTask(this.inputTask.value)}, this.categoryFilter.category)
+               /*  if(this.categoryFilter.category === 'Completed'){
+                    //alert('la tarea se inserto pero no la visualizaras')
+                } */
+                if(this.categoryFilter.category === 'Active'){
+                    this.filtersCategory(this.categoryFilter.category)
+                }
+                else if(this.categoryFilter.category === 'All'){
+                    this.renderTask(this.getTasks.getTasks())
+                }
+                addTask()
                 this.inputTask.value = ''
                 this.spanPendingTasks.innerHTML = `${ this.getTasks.pendingTasks()} items left`
             }         
@@ -53,6 +64,7 @@ export class Ui {
             this.buttonsContainer.remove()
         }
         console.log(this.buttonsContainer);
+        deleteTask()
     }
 
     checkCompletedTask(id, completedBolean) {
@@ -111,24 +123,31 @@ export class Ui {
                // console.log(this);
                 this.renderTask(this.getTasks.getTasks())
                 listSortable.option('disabled', false)
+                this.categoryFilter.category = category
+                console.log(this.categoryFilter);
                 return
             }
             case('Active'):{
-                console.log(this.getTasks.getTasks());
+               // console.log(this.getTasks.getTasks());
                 const filter =  this.getTasks.getTasks().filter((task) => !task.completed )
                 this.renderTask(filter)
                 listSortable.option('disabled', true)
-                return
+                this.categoryFilter.category = category
+                console.log(this.categoryFilter);
+                return 
             }
             case('Completed'):{
                 console.log(this.getTasks.getTasks());
                 const filter =  this.getTasks.getTasks().filter((task) => task.completed )
                 this.renderTask(filter)
                 listSortable.option('disabled', true)
+                this.categoryFilter.category = category
+                console.log(this.categoryFilter)
                 return
             }
+            
         }      
-       
+        
     }
 
     changeTheme() { 
